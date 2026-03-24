@@ -78,6 +78,7 @@
       justify-content: space-between;
       gap: 24px;
       padding: 16px 0;
+      overflow: visible;
     }
 
     .brand {
@@ -85,13 +86,19 @@
       align-items: center;
       gap: 14px;
       min-width: 0;
+      margin-left: -230px;
+      padding-right: 12px;
+      position: relative;
+      z-index: 1;
     }
 
     .brand-mark {
-      width: 56px;
-      height: 56px;
+      width: 128px;
+      height: 128px;
       flex: 0 0 auto;
+      object-fit: contain;
       filter: drop-shadow(0 0 14px rgba(201, 255, 26, 0.35));
+      margin: -4px 0 -38px -6px;
     }
 
     .brand-copy {
@@ -147,6 +154,7 @@
       flex-wrap: wrap;
       justify-content: flex-end;
       gap: 10px;
+      align-items: center;
     }
 
     .tab-link {
@@ -169,6 +177,60 @@
       background: rgba(201, 255, 26, 0.08);
       outline: none;
       box-shadow: inset 0 0 0 1px rgba(201, 255, 26, 0.12);
+    }
+
+    .nav-dropdown {
+      position: relative;
+    }
+
+    .nav-trigger {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-trigger::after {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-right: 2px solid currentColor;
+      border-bottom: 2px solid currentColor;
+      transform: rotate(45deg) translateY(-1px);
+      opacity: 0.7;
+    }
+
+    .nav-menu {
+      position: absolute;
+      top: calc(100% + 10px);
+      left: 0;
+      min-width: 190px;
+      padding: 10px;
+      display: grid;
+      gap: 6px;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: linear-gradient(180deg, rgba(14, 18, 25, 0.98), rgba(8, 11, 16, 0.98));
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.38);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(8px);
+      transition: opacity 180ms ease, transform 180ms ease, visibility 180ms ease;
+      z-index: 30;
+    }
+
+    .nav-dropdown:hover .nav-menu,
+    .nav-dropdown:focus-within .nav-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .nav-sub-link {
+      width: 100%;
+      text-align: left;
+      justify-content: flex-start;
+      border-radius: 14px;
+      padding: 10px 12px;
     }
 
     main {
@@ -344,9 +406,9 @@
     }
 
     .section-grid {
+      margin-top: 22px;
       display: grid;
       gap: 22px;
-      margin-top: 22px;
     }
 
     .section-head {
@@ -460,6 +522,83 @@
       color: var(--lime);
     }
 
+    .coming-card {
+      position: relative;
+      min-height: 420px;
+      padding: 32px;
+      overflow: hidden;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      align-items: stretch;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 24%),
+        linear-gradient(180deg, var(--panel), var(--panel-strong));
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .coming-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 50% 26%, rgba(201, 255, 26, 0.18), transparent 20%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 62%);
+      opacity: 0.95;
+    }
+
+    .coming-card::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: 24px;
+      width: min(74vw, 420px);
+      aspect-ratio: 1 / 1;
+      transform: translateX(-50%);
+      border: 4px solid rgba(217, 255, 31, 0.92);
+      border-radius: 50%;
+      clip-path: inset(50% 0 0 0);
+      opacity: 0.9;
+      filter: drop-shadow(0 0 12px rgba(201, 255, 26, 0.25));
+    }
+
+    .coming-diamond {
+      position: absolute;
+      left: 50%;
+      bottom: 70px;
+      width: 260px;
+      height: 170px;
+      transform: translateX(-50%);
+      z-index: 1;
+      opacity: 0.95;
+    }
+
+    .coming-copy {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      display: grid;
+      justify-items: center;
+      align-content: start;
+      padding-top: 6px;
+    }
+
+    .coming-copy h4 {
+      margin: 18px 0 0;
+      font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-size: clamp(2rem, 7vw, 4rem);
+      line-height: 0.95;
+    }
+
+    .coming-art {
+      position: relative;
+      min-height: 220px;
+      z-index: 1;
+    }
+
     footer {
       padding: 26px 0 12px;
       text-align: center;
@@ -468,6 +607,72 @@
     footer p {
       margin: 0;
       font-size: 0.94rem;
+    }
+
+    .view-toggle {
+      margin-top: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      color: var(--lime);
+      font-size: 0.94rem;
+      border-bottom: 1px solid rgba(201, 255, 26, 0.28);
+      padding-bottom: 2px;
+    }
+
+    .view-toggle:hover,
+    .view-toggle:focus-visible {
+      color: var(--text);
+      outline: none;
+    }
+
+    body.view-mobile .shell {
+      width: min(calc(100% - 20px), 420px);
+    }
+
+    body.view-mobile .nav-wrap {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    body.view-mobile nav {
+      justify-content: flex-start;
+    }
+
+    body.view-mobile .hero,
+    body.view-mobile .two-up,
+    body.view-mobile .contact-grid,
+    body.view-mobile .clinic-grid,
+    body.view-mobile .team-grid,
+    body.view-mobile .stats {
+      grid-template-columns: 1fr;
+    }
+
+    body.view-mobile .hero-copy,
+    body.view-mobile .content-block,
+    body.view-mobile .card,
+    body.view-mobile .schedule-card,
+    body.view-mobile .team-card,
+    body.view-mobile .contact-card,
+    body.view-mobile .hero-brand {
+      padding: 22px;
+    }
+
+    body.view-mobile .brand {
+      align-items: flex-start;
+    }
+
+    body.view-mobile .tab-link {
+      padding: 10px 14px;
+    }
+
+    body.view-mobile .nav-menu {
+      position: static;
+      margin-top: 8px;
+      opacity: 1;
+      visibility: visible;
+      transform: none;
     }
 
     @media (max-width: 980px) {
@@ -491,6 +696,14 @@
       nav {
         justify-content: flex-start;
       }
+
+      .nav-menu {
+        position: static;
+        margin-top: 8px;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+      }
     }
 
     @media (max-width: 640px) {
@@ -504,12 +717,15 @@
       .schedule-card,
       .team-card,
       .contact-card,
-      .hero-brand {
+      .hero-brand,
+      .coming-card {
         padding: 22px;
       }
 
       .brand {
         align-items: flex-start;
+        margin-left: 0;
+        padding-right: 0;
       }
 
       .tab-link {
@@ -522,28 +738,21 @@
   <header>
     <div class="shell nav-wrap">
       <div class="brand">
-        <svg class="brand-mark" viewBox="0 0 100 100" aria-hidden="true">
-          <defs>
-            <linearGradient id="brandRing" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#d8ff1f"></stop>
-              <stop offset="100%" stop-color="#4fd229"></stop>
-            </linearGradient>
-          </defs>
-          <circle cx="50" cy="50" r="46" fill="#0d1015" stroke="url(#brandRing)" stroke-width="6"></circle>
-          <circle cx="50" cy="50" r="33" fill="#151a22" stroke="#ffffff" stroke-opacity="0.24" stroke-width="2"></circle>
-          <path d="M26 59 L50 23 L74 59" fill="none" stroke="#d8ff1f" stroke-width="4" stroke-linecap="round"></path>
-          <path d="M50 23 L50 39" fill="none" stroke="#d8ff1f" stroke-width="4" stroke-linecap="round"></path>
-          <path d="M31 54 H69" fill="none" stroke="#4fd229" stroke-width="4" stroke-linecap="round"></path>
-          <text x="50" y="73" text-anchor="middle" fill="#ffffff" font-size="20" font-family="Impact, sans-serif">W</text>
-        </svg>
+        <img class="brand-mark" src="westside-logo-cutout.png" alt="Westside Baseball logo">
         <div class="brand-copy">
           <h1>Westside Baseball</h1>
-          <p>Clinics, training, instruction, and travel teams.</p>
+          <p>Work Together Stay Together</p>
         </div>
       </div>
       <nav role="tablist" aria-label="Westside Baseball sections">
         <button class="tab-link" id="tab-home" role="tab" aria-selected="true" aria-controls="home" data-tab="home">Home</button>
-        <button class="tab-link" id="tab-about" role="tab" aria-selected="false" aria-controls="about" data-tab="about">About Us</button>
+        <div class="nav-dropdown">
+          <button class="tab-link nav-trigger" id="tab-about" role="tab" aria-selected="false" aria-controls="about" data-tab="about">About Us</button>
+          <div class="nav-menu" aria-label="About Us pages">
+            <button class="tab-link nav-sub-link" id="tab-about-overview" role="tab" aria-selected="false" aria-controls="about" data-tab="about">Overview</button>
+            <button class="tab-link nav-sub-link" id="tab-coaches" role="tab" aria-selected="false" aria-controls="coaches" data-tab="coaches">Coaches</button>
+          </div>
+        </div>
         <button class="tab-link" id="tab-clinics" role="tab" aria-selected="false" aria-controls="clinics" data-tab="clinics">Upcoming Clinics</button>
         <button class="tab-link" id="tab-teams" role="tab" aria-selected="false" aria-controls="teams" data-tab="teams">Teams</button>
         <button class="tab-link" id="tab-contact" role="tab" aria-selected="false" aria-controls="contact" data-tab="contact">Contact Us</button>
@@ -580,7 +789,7 @@
           </div>
         </div>
         <div class="hero-card hero-brand">
-          <img class="logo-image" id="logo-image" src="image_a7f3e5e2.png" alt="Westside Baseball logo">
+          <img class="logo-image" id="logo-image" src="westside-logo-cutout.png" alt="Westside Baseball logo">
           <svg class="crest" viewBox="0 0 420 470" aria-label="Westside Baseball crest">
             <defs>
               <linearGradient id="outerGlow" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -698,36 +907,23 @@
     </section>
 
     <section class="panel" id="teams" role="tabpanel" aria-labelledby="tab-teams" hidden>
-      <div class="section-head">
-        <span class="eyebrow">Travel Teams</span>
-        <h3>Built To Compete.</h3>
-        <p>Use this section to present current age groups, coaching staff, schedules, and tryout information.</p>
-      </div>
-      <div class="team-grid">
-        <article class="team-card">
-          <h4>12U Development</h4>
-          <p>Foundational team environment focused on mechanics, baseball habits, and game awareness.</p>
-          <div class="team-meta">
-            <span>Season focus: fundamentals and confidence</span>
-            <span>Ideal for: players building competitive game experience</span>
-          </div>
-        </article>
-        <article class="team-card">
-          <h4>14U Select</h4>
-          <p>For athletes ready for a faster competitive level with more structured team expectations.</p>
-          <div class="team-meta">
-            <span>Season focus: role clarity and advanced situational play</span>
-            <span>Ideal for: players preparing for stronger tournament competition</span>
-          </div>
-        </article>
-        <article class="team-card">
-          <h4>High School Summer</h4>
-          <p>Designed to keep high school athletes sharp through summer work, games, and high-level instruction.</p>
-          <div class="team-meta">
-            <span>Season focus: maintenance, exposure, and game-ready reps</span>
-            <span>Ideal for: players targeting varsity impact and continued development</span>
-          </div>
-        </article>
+      <div class="coming-card">
+        <div class="coming-copy">
+          <span class="eyebrow">Travel Teams</span>
+          <h4>Coming Summer 2027</h4>
+        </div>
+        <div class="coming-art" aria-hidden="true">
+          <svg class="coming-diamond" viewBox="0 0 260 170">
+            <path d="M130 20 L220 86 L130 152 L40 86 Z" fill="none" stroke="#d9ff1f" stroke-width="4"></path>
+            <path d="M130 20 L130 58" fill="none" stroke="#d9ff1f" stroke-width="4" stroke-linecap="round"></path>
+            <path d="M40 86 H220" fill="none" stroke="#ffffff" stroke-opacity="0.25" stroke-width="3"></path>
+            <circle cx="130" cy="86" r="14" fill="#d9ff1f" fill-opacity="0.85"></circle>
+            <rect x="120" y="10" width="20" height="20" transform="rotate(45 130 20)" fill="#ffffff" stroke="#d9ff1f" stroke-width="3"></rect>
+            <rect x="210" y="76" width="20" height="20" transform="rotate(45 220 86)" fill="#ffffff" stroke="#d9ff1f" stroke-width="3"></rect>
+            <rect x="120" y="142" width="20" height="20" transform="rotate(45 130 152)" fill="#ffffff" stroke="#d9ff1f" stroke-width="3"></rect>
+            <rect x="30" y="76" width="20" height="20" transform="rotate(45 40 86)" fill="#ffffff" stroke="#d9ff1f" stroke-width="3"></rect>
+          </svg>
+        </div>
       </div>
     </section>
 
@@ -756,10 +952,45 @@
         </div>
       </div>
     </section>
+
+    <section class="panel" id="coaches" role="tabpanel" aria-labelledby="tab-coaches" hidden>
+      <div class="section-head">
+        <span class="eyebrow">Coaches</span>
+        <h3>Instruction Led By Coaches Who Teach The Details.</h3>
+        <p>Use this page to highlight your staff, playing background, training specialties, and the tone they bring to the program.</p>
+      </div>
+      <div class="team-grid">
+        <article class="team-card">
+          <h4>Program Director</h4>
+          <p>Lead voice for Westside Baseball, responsible for player development structure, training standards, and team identity.</p>
+          <div class="team-meta">
+            <span>Specialties: overall development planning, hitting progression, competitive standards</span>
+            <span>Best place to add: coaching bio, experience, and player-development philosophy</span>
+          </div>
+        </article>
+        <article class="team-card">
+          <h4>Infield / Defense Coach</h4>
+          <p>Focused on footwork, glove actions, throwing patterns, and the small details that clean up defensive play.</p>
+          <div class="team-meta">
+            <span>Specialties: infield movement, transfers, timing, pre-pitch habits</span>
+            <span>Best place to add: playing history, defensive background, and clinic roles</span>
+          </div>
+        </article>
+        <article class="team-card">
+          <h4>Hitting Coach</h4>
+          <p>Builds repeatable swings, better timing, stronger contact quality, and a clearer approach in the box.</p>
+          <div class="team-meta">
+            <span>Specialties: swing mechanics, approach, timing, individualized adjustments</span>
+            <span>Best place to add: certifications, background, and lesson availability</span>
+          </div>
+        </article>
+      </div>
+    </section>
   </main>
 
   <footer class="shell">
     <p>Westside Baseball. Serious training. Competitive teams. Simple single-page foundation ready for real content.</p>
+    <a class="view-toggle" id="view-toggle" href="#">Switch to Mobile View</a>
   </footer>
 
   <script>
@@ -767,6 +998,8 @@
     const panels = Array.from(document.querySelectorAll(".panel"));
     const jumpLinks = Array.from(document.querySelectorAll("[data-jump]"));
     const logoImage = document.getElementById("logo-image");
+    const viewToggle = document.getElementById("view-toggle");
+    const viewStorageKey = "westside-view-mode";
 
     function activateTab(targetId) {
       tabs.forEach((tab) => {
@@ -810,10 +1043,29 @@
     const initialTab = window.location.hash.replace("#", "");
     const validTabs = new Set(tabs.map((tab) => tab.dataset.tab));
 
+    function setViewMode(mode) {
+      document.body.classList.toggle("view-mobile", mode === "mobile");
+      if (viewToggle) {
+        viewToggle.textContent = mode === "mobile" ? "Switch to Desktop View" : "Switch to Mobile View";
+      }
+      window.localStorage.setItem(viewStorageKey, mode);
+    }
+
     if (logoImage) {
       logoImage.addEventListener("load", () => logoImage.classList.add("visible"));
       logoImage.addEventListener("error", () => logoImage.remove());
     }
+
+    if (viewToggle) {
+      viewToggle.addEventListener("click", (event) => {
+        event.preventDefault();
+        const nextMode = document.body.classList.contains("view-mobile") ? "desktop" : "mobile";
+        setViewMode(nextMode);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    }
+
+    setViewMode(window.localStorage.getItem(viewStorageKey) === "mobile" ? "mobile" : "desktop");
 
     activateTab(validTabs.has(initialTab) ? initialTab : "home");
   </script>
