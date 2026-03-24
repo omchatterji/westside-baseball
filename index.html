@@ -157,6 +157,44 @@
       align-items: center;
     }
 
+    .menu-toggle {
+      display: none;
+      appearance: none;
+      width: 46px;
+      height: 46px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text);
+      cursor: pointer;
+      padding: 0;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .menu-toggle span {
+      display: block;
+      width: 18px;
+      height: 2px;
+      border-radius: 999px;
+      background: currentColor;
+      transition: transform 180ms ease, opacity 180ms ease;
+    }
+
+    body.mobile-nav-open .menu-toggle span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    body.mobile-nav-open .menu-toggle span:nth-child(2) {
+      opacity: 0;
+    }
+
+    body.mobile-nav-open .menu-toggle span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
     .tab-link {
       appearance: none;
       border: 1px solid transparent;
@@ -632,12 +670,40 @@
     }
 
     body.view-mobile .nav-wrap {
-      flex-direction: column;
-      align-items: stretch;
+      flex-direction: row;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    body.view-mobile .brand {
+      margin-left: 0;
+      padding-right: 0;
+      align-items: center;
+    }
+
+    body.view-mobile .brand-mark {
+      width: 68px;
+      height: 68px;
+      margin: 0;
+    }
+
+    body.view-mobile .menu-toggle {
+      display: inline-flex;
+      margin-left: auto;
     }
 
     body.view-mobile nav {
+      display: none;
+      width: 100%;
       justify-content: flex-start;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 8px;
+      padding-top: 10px;
+    }
+
+    body.view-mobile.mobile-nav-open nav {
+      display: flex;
     }
 
     body.view-mobile .hero,
@@ -660,16 +726,23 @@
     }
 
     body.view-mobile .brand {
-      align-items: flex-start;
+      align-items: center;
     }
 
     body.view-mobile .tab-link {
       padding: 10px 14px;
+      width: 100%;
+      text-align: left;
     }
 
     body.view-mobile .nav-menu {
       position: static;
-      margin-top: 8px;
+      width: 100%;
+      margin-top: 6px;
+      padding: 4px 0 0 12px;
+      border: 0;
+      background: transparent;
+      box-shadow: none;
       opacity: 1;
       visibility: visible;
       transform: none;
@@ -689,17 +762,50 @@
       }
 
       .nav-wrap {
-        flex-direction: column;
-        align-items: stretch;
+        flex-direction: row;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .brand {
+        margin-left: 0;
+        padding-right: 0;
+        align-items: center;
+      }
+
+      .brand-mark {
+        width: 68px;
+        height: 68px;
+        margin: 0;
+      }
+
+      .menu-toggle {
+        display: inline-flex;
+        margin-left: auto;
       }
 
       nav {
+        display: none;
+        width: 100%;
         justify-content: flex-start;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+        padding-top: 10px;
+      }
+
+      body.mobile-nav-open nav {
+        display: flex;
       }
 
       .nav-menu {
         position: static;
-        margin-top: 8px;
+        width: 100%;
+        margin-top: 6px;
+        padding: 4px 0 0 12px;
+        border: 0;
+        background: transparent;
+        box-shadow: none;
         opacity: 1;
         visibility: visible;
         transform: none;
@@ -744,7 +850,12 @@
           <p>Work Together Stay Together</p>
         </div>
       </div>
-      <nav role="tablist" aria-label="Westside Baseball sections">
+      <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="site-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav id="site-nav" role="tablist" aria-label="Westside Baseball sections">
         <button class="tab-link" id="tab-home" role="tab" aria-selected="true" aria-controls="home" data-tab="home">Home</button>
         <div class="nav-dropdown">
           <button class="tab-link nav-trigger" id="tab-about" role="tab" aria-selected="false" aria-controls="about" data-tab="about">About Us</button>
@@ -999,6 +1110,7 @@
     const jumpLinks = Array.from(document.querySelectorAll("[data-jump]"));
     const logoImage = document.getElementById("logo-image");
     const viewToggle = document.getElementById("view-toggle");
+    const menuToggle = document.getElementById("menu-toggle");
     const viewStorageKey = "westside-view-mode";
 
     function activateTab(targetId) {
@@ -1018,7 +1130,15 @@
     }
 
     tabs.forEach((tab) => {
-      tab.addEventListener("click", () => activateTab(tab.dataset.tab));
+      tab.addEventListener("click", () => {
+        activateTab(tab.dataset.tab);
+        if (document.body.classList.contains("view-mobile") || window.innerWidth <= 980) {
+          document.body.classList.remove("mobile-nav-open");
+          if (menuToggle) {
+            menuToggle.setAttribute("aria-expanded", "false");
+          }
+        }
+      });
       tab.addEventListener("keydown", (event) => {
         const index = tabs.indexOf(tab);
         if (event.key === "ArrowRight") {
@@ -1045,8 +1165,14 @@
 
     function setViewMode(mode) {
       document.body.classList.toggle("view-mobile", mode === "mobile");
+      if (mode !== "mobile") {
+        document.body.classList.remove("mobile-nav-open");
+      }
       if (viewToggle) {
         viewToggle.textContent = mode === "mobile" ? "Switch to Desktop View" : "Switch to Mobile View";
+      }
+      if (menuToggle) {
+        menuToggle.setAttribute("aria-expanded", String(document.body.classList.contains("mobile-nav-open")));
       }
       window.localStorage.setItem(viewStorageKey, mode);
     }
@@ -1062,6 +1188,13 @@
         const nextMode = document.body.classList.contains("view-mobile") ? "desktop" : "mobile";
         setViewMode(nextMode);
         window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    }
+
+    if (menuToggle) {
+      menuToggle.addEventListener("click", () => {
+        const isOpen = document.body.classList.toggle("mobile-nav-open");
+        menuToggle.setAttribute("aria-expanded", String(isOpen));
       });
     }
 
