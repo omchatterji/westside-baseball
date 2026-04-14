@@ -86,7 +86,7 @@
       align-items: center;
       gap: 14px;
       min-width: 0;
-      margin-left: -230px;
+      margin-left: -250px;
       padding-right: 12px;
       position: relative;
       z-index: 1;
@@ -103,6 +103,9 @@
 
     .brand-copy {
       min-width: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
     .eyebrow {
@@ -479,7 +482,7 @@
     }
 
     .team-grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: 1fr;
     }
 
     .contact-grid {
@@ -545,6 +548,79 @@
       gap: 8px;
       margin-top: 16px;
       font-size: 0.94rem;
+    }
+
+    .team-card p {
+      margin: 0;
+      max-width: 72ch;
+      line-height: 1.7;
+    }
+
+    .team-card.team-card-featured {
+      padding-bottom: 30px;
+    }
+
+    .team-media {
+      display: grid;
+      grid-template-columns: 180px minmax(0, 1fr);
+      gap: 24px;
+      align-items: start;
+    }
+
+    .team-photo {
+      aspect-ratio: 4 / 5;
+      width: 100%;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background:
+        radial-gradient(circle at top, rgba(201, 255, 26, 0.28), transparent 38%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(7, 10, 15, 0.95));
+      box-shadow: inset 0 0 0 1px rgba(201, 255, 26, 0.08);
+      display: grid;
+      place-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .team-photo::before {
+      content: "";
+      position: absolute;
+      inset: 14px;
+      border-radius: 16px;
+      border: 1px dashed rgba(201, 255, 26, 0.25);
+    }
+
+    .team-photo span {
+      position: relative;
+      z-index: 1;
+      font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+      font-size: 2.8rem;
+      letter-spacing: 0.08em;
+      color: rgba(244, 247, 251, 0.92);
+    }
+
+    .team-photo img {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .team-content {
+      display: grid;
+      gap: 12px;
+      align-content: start;
+    }
+
+    .team-title {
+      display: inline-block;
+      font-size: 0.96rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--lime);
     }
 
     .feature-band {
@@ -695,9 +771,9 @@
     body.view-mobile nav {
       display: none;
       width: 100%;
-      justify-content: flex-start;
+      justify-content: center;
       flex-direction: column;
-      align-items: stretch;
+      align-items: center;
       gap: 8px;
       padding-top: 10px;
     }
@@ -731,21 +807,30 @@
 
     body.view-mobile .tab-link {
       padding: 10px 14px;
-      width: 100%;
-      text-align: left;
+      width: auto;
+      text-align: center;
     }
 
     body.view-mobile .nav-menu {
       position: static;
-      width: 100%;
+      width: auto;
       margin-top: 6px;
-      padding: 4px 0 0 12px;
+      padding: 4px 0 0;
       border: 0;
       background: transparent;
       box-shadow: none;
       opacity: 1;
       visibility: visible;
       transform: none;
+      justify-items: center;
+    }
+
+    body.view-mobile .team-media {
+      grid-template-columns: 1fr;
+    }
+
+    body.view-mobile .team-photo {
+      max-width: 220px;
     }
 
     @media (max-width: 980px) {
@@ -787,9 +872,9 @@
       nav {
         display: none;
         width: 100%;
-        justify-content: flex-start;
+        justify-content: center;
         flex-direction: column;
-        align-items: stretch;
+        align-items: center;
         gap: 8px;
         padding-top: 10px;
       }
@@ -800,15 +885,29 @@
 
       .nav-menu {
         position: static;
-        width: 100%;
+        width: auto;
         margin-top: 6px;
-        padding: 4px 0 0 12px;
+        padding: 4px 0 0;
         border: 0;
         background: transparent;
         box-shadow: none;
         opacity: 1;
         visibility: visible;
         transform: none;
+        justify-items: center;
+      }
+
+      .tab-link {
+        width: auto;
+        text-align: center;
+      }
+
+      .team-media {
+        grid-template-columns: 1fr;
+      }
+
+      .team-photo {
+        max-width: 220px;
       }
     }
 
@@ -876,7 +975,7 @@
       <div class="hero">
         <div class="hero-card hero-copy">
           <span class="eyebrow">Player Development</span>
-          <h2>Built For Ballplayers Who Want More.</h2>
+          <h2>Built For Westside Ballplayers Who Want More.</h2>
           <p>
             Westside Baseball delivers focused instruction for athletes who want to sharpen mechanics, compete with confidence, and grow inside a serious baseball environment. From first touch fundamentals to advanced travel ball preparation, every session is designed around purposeful reps and measurable progress.
           </p>
@@ -890,7 +989,7 @@
               <span>Core offerings: clinics, training, instruction, and teams</span>
             </div>
             <div class="stat">
-              <strong>12U-18U</strong>
+              <strong>Tee Ball-High School</strong>
               <span>Development pathway built for youth through high school athletes</span>
             </div>
             <div class="stat">
@@ -935,9 +1034,6 @@
             <text x="210" y="413" text-anchor="middle" fill="#ffffff" font-size="28" font-family="Impact, sans-serif">EST. 2027</text>
           </svg>
         </div>
-      </div>
-      <div class="feature-band">
-        Designed as a one-page home base for Westside Baseball. When you have the exact logo file on disk, it can replace the inline crest without changing the layout.
       </div>
     </section>
 
@@ -1071,28 +1167,50 @@
         <p>Use this page to highlight your staff, playing background, training specialties, and the tone they bring to the program.</p>
       </div>
       <div class="team-grid">
-        <article class="team-card">
-          <h4>Program Director</h4>
-          <p>Lead voice for Westside Baseball, responsible for player development structure, training standards, and team identity.</p>
-          <div class="team-meta">
-            <span>Specialties: overall development planning, hitting progression, competitive standards</span>
-            <span>Best place to add: coaching bio, experience, and player-development philosophy</span>
+        <article class="team-card team-card-featured">
+          <div class="team-media">
+            <div class="team-photo">
+              <img src="bgraff.png" alt="Brooks Graff">
+            </div>
+            <div class="team-content">
+              <h4>Brooks Graff</h4>
+              <span class="team-title">Director &amp; Program Head</span>
+              <p>Brooks leads the direction of Westside Baseball and sets the standard for how the program teaches, competes, and develops players over time. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere, justo vel bibendum dignissim, lorem felis hendrerit nisl, ut tristique lorem turpis non augue. Vivamus ac nisi sed arcu feugiat porta non at neque.</p>
+              <div class="team-meta">
+                <span>Specialties: player development structure, program leadership, long-term training standards</span>
+                <span>Best place to add: full coaching bio, experience, philosophy, and program vision</span>
+              </div>
+            </div>
           </div>
         </article>
         <article class="team-card">
-          <h4>Infield / Defense Coach</h4>
-          <p>Focused on footwork, glove actions, throwing patterns, and the small details that clean up defensive play.</p>
-          <div class="team-meta">
-            <span>Specialties: infield movement, transfers, timing, pre-pitch habits</span>
-            <span>Best place to add: playing history, defensive background, and clinic roles</span>
+          <div class="team-media">
+            <div class="team-photo">
+              <img src="jhesseling.png" alt="Jake Hesseling">
+            </div>
+            <div class="team-content">
+              <h4>Jake Hesseling</h4>
+              <span class="team-title">Instructor &amp; Coach</span>
+              <p>Jake works with athletes on skill development, confidence, and repeatable habits that translate from practice into games.</p>
+              <div class="team-meta">
+                <span>Best place to add: training specialties, playing background, and lesson focus areas</span>
+              </div>
+            </div>
           </div>
         </article>
         <article class="team-card">
-          <h4>Hitting Coach</h4>
-          <p>Builds repeatable swings, better timing, stronger contact quality, and a clearer approach in the box.</p>
-          <div class="team-meta">
-            <span>Specialties: swing mechanics, approach, timing, individualized adjustments</span>
-            <span>Best place to add: certifications, background, and lesson availability</span>
+          <div class="team-media">
+            <div class="team-photo">
+              <img src="ochatterji.png" alt="Om Chatterji">
+            </div>
+            <div class="team-content">
+              <h4>Om Chatterji</h4>
+              <span class="team-title">Instructor &amp; Coach</span>
+              <p>Om supports player growth through detailed instruction, steady feedback, and an emphasis on clean fundamentals.</p>
+              <div class="team-meta">
+                <span>Best place to add: coaching background, areas of emphasis, and availability details</span>
+              </div>
+            </div>
           </div>
         </article>
       </div>
@@ -1100,7 +1218,7 @@
   </main>
 
   <footer class="shell">
-    <p>Westside Baseball. Serious training. Competitive teams. Simple single-page foundation ready for real content.</p>
+    <p>2026 Westside Baseball.</p>
     <a class="view-toggle" id="view-toggle" href="#">Switch to Mobile View</a>
   </footer>
 
