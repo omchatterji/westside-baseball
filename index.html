@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Westside Baseball</title>
+  <link rel="icon" type="image/png" href="westside-logo-cutout.png">
   <style>
     :root {
       --bg: #06080d;
@@ -334,9 +335,9 @@
 
     .hero-copy h2 {
       margin-top: 18px;
-      font-size: clamp(2.8rem, 8vw, 5.6rem);
+      font-size: clamp(2rem, 6vw, 3.2rem);
       line-height: 0.92;
-      max-width: 10ch;
+      max-width: 16ch;
     }
 
     .hero-copy p {
@@ -467,6 +468,7 @@
 
     .two-up,
     .clinic-grid,
+    .program-stack,
     .team-grid,
     .contact-grid {
       display: grid;
@@ -479,6 +481,30 @@
 
     .clinic-grid {
       grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .program-stack {
+      grid-template-columns: 1fr;
+    }
+
+    .program-stack .card,
+    .program-stack .content-block {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(201, 255, 26, 0.12);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent 18%),
+        linear-gradient(180deg, var(--panel), var(--panel-strong));
+    }
+
+    .program-stack .card::before,
+    .program-stack .content-block::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--lime), rgba(79, 210, 41, 0.32));
+      opacity: 0.9;
     }
 
     .team-grid {
@@ -514,11 +540,53 @@
       margin-bottom: 10px;
     }
 
+    .schedule-card {
+      position: relative;
+    }
+
+    .schedule-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .price-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 8px 14px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text);
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+    }
+
+    .price-badge.price-badge-free {
+      background: linear-gradient(135deg, var(--lime), var(--green));
+      border-color: rgba(201, 255, 26, 0.3);
+      color: #061008;
+      box-shadow: 0 12px 28px rgba(79, 210, 41, 0.24);
+    }
+
     .pill-row {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
       margin-top: 16px;
+    }
+
+    .card-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 18px;
     }
 
     .pill {
@@ -536,11 +604,29 @@
       gap: 8px;
       padding: 8px 12px;
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.04);
-      color: var(--text);
+      background: rgba(46, 125, 50, 0.24);
+      color: #c8f0cd;
       font-size: 0.85rem;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      margin-bottom: 16px;
+      border: 1px solid rgba(76, 175, 80, 0.42);
+    }
+
+    .date-chip.status-almost-full {
+      background: rgba(255, 215, 64, 0.18);
+      border-color: rgba(255, 215, 64, 0.42);
+      color: #ffe082;
+    }
+
+    .date-chip.status-full {
+      background: rgba(255, 87, 87, 0.16);
+      border-color: rgba(255, 87, 87, 0.42);
+      color: #ff9d9d;
+    }
+
+    .service-date {
+      margin: 0 0 12px;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.5;
     }
 
     .team-meta {
@@ -630,6 +716,155 @@
       background: linear-gradient(90deg, rgba(201, 255, 26, 0.14), rgba(79, 210, 41, 0.08));
       border: 1px solid rgba(201, 255, 26, 0.15);
       color: var(--text);
+    }
+
+    .feature-band strong {
+      color: var(--lime);
+    }
+
+    .carousel-shell {
+      margin-top: 28px;
+      position: relative;
+    }
+
+    .carousel-window {
+      position: relative;
+      min-height: 420px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at top right, rgba(201, 255, 26, 0.1), transparent 28%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 22px;
+    }
+
+    .carousel-track {
+      position: relative;
+      min-height: 420px;
+    }
+
+    .carousel-slide {
+      position: absolute;
+      inset: 0;
+      padding: 26px 26px 78px;
+      opacity: 0;
+      transform: translateX(24px);
+      pointer-events: none;
+      transition: opacity 280ms ease, transform 280ms ease;
+    }
+
+    .carousel-slide.active {
+      opacity: 1;
+      transform: translateX(0);
+      pointer-events: auto;
+    }
+
+    .carousel-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+      color: var(--lime);
+      font-size: 0.88rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .carousel-title {
+      font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      line-height: 0.95;
+      margin: 0;
+      max-width: 14ch;
+    }
+
+    .carousel-copy {
+      margin: 16px 0 0;
+      color: var(--muted);
+      max-width: 58ch;
+      line-height: 1.7;
+      font-size: 1rem;
+    }
+
+    .carousel-slide .date-chip,
+    .carousel-slide .pill-row,
+    .carousel-slide .feature-band {
+      margin-top: 18px;
+    }
+
+    .carousel-slide .feature-band {
+      border-radius: 18px;
+    }
+
+    .carousel-slide-clinic h4 {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      margin: 0 0 10px;
+      font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .carousel-slide-clinic p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 68ch;
+    }
+
+    .carousel-slide-clinic .service-date {
+      margin: 0 0 12px;
+      font-size: 0.96rem;
+    }
+
+    .carousel-slide-clinic .schedule-top {
+      margin-bottom: 18px;
+    }
+
+    .carousel-slide-clinic .pill-row {
+      margin-top: 18px;
+    }
+
+    .carousel-controls {
+      position: absolute;
+      right: 20px;
+      bottom: 20px;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    .carousel-buttons {
+      display: flex;
+      gap: 8px;
+    }
+
+    .carousel-button {
+      appearance: none;
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 999px;
+      padding: 0;
+      background: rgba(7, 10, 15, 0.72);
+      backdrop-filter: blur(10px);
+      color: var(--text);
+      font-size: 1rem;
+      line-height: 1;
+      cursor: pointer;
+      transition: 180ms ease;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.28);
+    }
+
+    .carousel-button:hover,
+    .carousel-button:focus-visible {
+      border-color: rgba(201, 255, 26, 0.26);
+      background: rgba(201, 255, 26, 0.08);
+      outline: none;
     }
 
     .contact-card strong {
@@ -792,6 +1027,7 @@
     }
 
     body.view-mobile .hero-copy,
+    body.view-mobile .carousel-shell,
     body.view-mobile .content-block,
     body.view-mobile .card,
     body.view-mobile .schedule-card,
@@ -799,6 +1035,10 @@
     body.view-mobile .contact-card,
     body.view-mobile .hero-brand {
       padding: 22px;
+    }
+
+    body.view-mobile .carousel-slide {
+      padding: 22px 22px 86px;
     }
 
     body.view-mobile .brand {
@@ -917,6 +1157,7 @@
       }
 
       .hero-copy,
+      .carousel-shell,
       .content-block,
       .card,
       .schedule-card,
@@ -925,6 +1166,15 @@
       .hero-brand,
       .coming-card {
         padding: 22px;
+      }
+
+      .carousel-window,
+      .carousel-track {
+        min-height: 460px;
+      }
+
+      .carousel-slide {
+        padding: 22px 22px 86px;
       }
 
       .brand {
@@ -963,6 +1213,7 @@
             <button class="tab-link nav-sub-link" id="tab-coaches" role="tab" aria-selected="false" aria-controls="coaches" data-tab="coaches">Coaches</button>
           </div>
         </div>
+        <button class="tab-link" id="tab-programs" role="tab" aria-selected="false" aria-controls="programs" data-tab="programs">Our Programs</button>
         <button class="tab-link" id="tab-clinics" role="tab" aria-selected="false" aria-controls="clinics" data-tab="clinics">Upcoming Clinics</button>
         <button class="tab-link" id="tab-teams" role="tab" aria-selected="false" aria-controls="teams" data-tab="teams">Teams</button>
         <button class="tab-link" id="tab-contact" role="tab" aria-selected="false" aria-controls="contact" data-tab="contact">Contact Us</button>
@@ -974,28 +1225,16 @@
     <section class="panel active" id="home" role="tabpanel" aria-labelledby="tab-home">
       <div class="hero">
         <div class="hero-card hero-copy">
-          <span class="eyebrow">Player Development</span>
           <h2>Built For Westside Ballplayers Who Want More.</h2>
           <p>
             Westside Baseball delivers focused instruction for athletes who want to sharpen mechanics, compete with confidence, and grow inside a serious baseball environment. From first touch fundamentals to advanced travel ball preparation, every session is designed around purposeful reps and measurable progress.
           </p>
-          <div class="hero-actions">
-            <a class="button button-primary" href="#clinics" data-jump="clinics">View Clinics</a>
-            <a class="button button-secondary" href="#contact" data-jump="contact">Contact The Program</a>
+          <div class="feature-band" id="team-launch-highlight" data-carousel-source="announcement">
+            <strong>New for Summer 2027:</strong> Westside Baseball is establishing a Westside high school travel team - more details to follow as plans are finalized.
           </div>
-          <div class="stats">
-            <div class="stat">
-              <strong>4</strong>
-              <span>Core offerings: clinics, training, instruction, and teams</span>
-            </div>
-            <div class="stat">
-              <strong>Tee Ball-High School</strong>
-              <span>Development pathway built for youth through high school athletes</span>
-            </div>
-            <div class="stat">
-              <strong>Year-Round</strong>
-              <span>Seasonal clinics, offseason work, and in-season support</span>
-            </div>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#programs" data-jump="programs">Explore Programs</a>
+            <a class="button button-secondary" href="#contact" data-jump="contact">Contact Us</a>
           </div>
         </div>
         <div class="hero-card hero-brand">
@@ -1031,8 +1270,34 @@
             <text x="210" y="336" text-anchor="middle" fill="#ffffff" font-size="60" font-family="Impact, sans-serif" letter-spacing="3">WESTSIDE</text>
             <text x="210" y="370" text-anchor="middle" fill="url(#grass)" font-size="44" font-family="Impact, sans-serif" letter-spacing="3">BASEBALL</text>
             <path d="M112 394 Q210 350 308 394 Q276 429 210 444 Q144 429 112 394 Z" fill="#0a0d11" stroke="url(#outerGlow)" stroke-width="5"></path>
-            <text x="210" y="413" text-anchor="middle" fill="#ffffff" font-size="28" font-family="Impact, sans-serif">EST. 2027</text>
+            <text x="210" y="413" text-anchor="middle" fill="#ffffff" font-size="28" font-family="Impact, sans-serif">EST. 1999</text>
           </svg>
+        </div>
+      </div>
+      <div class="carousel-shell">
+        <div class="carousel-window" aria-live="polite">
+          <div class="carousel-track" id="home-carousel-track"></div>
+        </div>
+        <div class="carousel-controls">
+          <div class="carousel-buttons">
+            <button class="carousel-button" id="carousel-prev" type="button" aria-label="Previous slide">&#9664;</button>
+            <button class="carousel-button" id="carousel-pause" type="button" aria-pressed="false" aria-label="Pause carousel">&#10074;&#10074;</button>
+            <button class="carousel-button" id="carousel-next" type="button" aria-label="Next slide">&#9654;</button>
+          </div>
+        </div>
+      </div>
+      <div class="stats">
+        <div class="stat">
+          <strong>4</strong>
+          <span>Core offerings: clinics, training, instruction, and teams</span>
+        </div>
+        <div class="stat">
+          <strong>Tee Ball-High School</strong>
+          <span>Development pathway built for youth through high school athletes</span>
+        </div>
+        <div class="stat">
+          <strong>Year-Round</strong>
+          <span>Seasonal clinics, offseason work, and in-season support</span>
         </div>
       </div>
     </section>
@@ -1073,41 +1338,142 @@
       </div>
     </section>
 
+    <section class="panel" id="programs" role="tabpanel" aria-labelledby="tab-programs" hidden>
+      <div class="section-head">
+        <span class="eyebrow">Our Programs</span>
+        <h3>Training Paths Built Around How Players Grow.</h3>
+        <p>Westside Baseball offers multiple ways for players to build skill, confidence, and game readiness throughout the year.</p>
+      </div>
+      <div class="program-stack">
+        <article class="card">
+          <h4>Private 1-1 Instruction</h4>
+          <p>Individual coaching sessions built around player-specific goals, detailed feedback, and a clear development plan.</p>
+          <div class="pill-row">
+            <span class="pill">Individualized</span>
+            <span class="pill">Skill Specific</span>
+            <span class="pill">Player Focused</span>
+          </div>
+        </article>
+        <article class="card">
+          <h4>Group Lessons</h4>
+          <p>Small-group training that combines quality reps, shared competition, and instruction players can apply right away.</p>
+          <div class="pill-row">
+            <span class="pill">Small Groups</span>
+            <span class="pill">Competitive Reps</span>
+            <span class="pill">Shared Learning</span>
+          </div>
+        </article>
+        <article class="card">
+          <h4>Camps &amp; Clinics</h4>
+          <p>High-energy seasonal events focused on fundamentals, advanced skill work, and game-ready baseball habits.</p>
+          <div class="pill-row">
+            <span class="pill">Seasonal Events</span>
+            <span class="pill">High Rep Volume</span>
+            <span class="pill">Skill Development</span>
+          </div>
+        </article>
+        <article class="card">
+          <h4>High School Travel Teams</h4>
+          <p>Competitive team opportunities for high school players looking to develop together and perform in meaningful game environments.</p>
+          <div class="pill-row">
+            <span class="pill">Team Competition</span>
+            <span class="pill">Player Development</span>
+            <span class="pill">High School Level</span>
+          </div>
+        </article>
+        <article class="card">
+          <h4>Strength &amp; Conditioning Training</h4>
+          <p>Performance-focused training designed to improve movement quality, durability, power, and overall athletic readiness.</p>
+          <div class="pill-row">
+            <span class="pill">Athletic Performance</span>
+            <span class="pill">Durability</span>
+            <span class="pill">Year-Round Work</span>
+          </div>
+        </article>
+      </div>
+      <div class="two-up" style="margin-top: 22px;">
+        <div class="content-block">
+          <h4>Who It’s For</h4>
+          <ul class="info-list">
+            <li>Young players building fundamentals and confidence for the first time.</li>
+            <li>Experienced athletes looking for sharper mechanics, stronger movement, and more advanced training structure.</li>
+            <li>Families who want a clear development path from lessons and clinics into travel team opportunities.</li>
+          </ul>
+        </div>
+        <div class="content-block">
+          <h4>What Players Can Expect</h4>
+          <ul class="info-list">
+            <li>Clear coaching language and drills with purpose.</li>
+            <li>Fast-paced sessions that balance detail work with competition.</li>
+            <li>A development environment that values consistency, effort, and team-first habits.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
     <section class="panel" id="clinics" role="tabpanel" aria-labelledby="tab-clinics" hidden>
       <div class="section-head">
         <span class="eyebrow">Upcoming Clinics</span>
         <h3>Train With A Plan.</h3>
-        <p>Sample clinic cards are included so the page is usable now. Dates and registration links can be updated as soon as you have them.</p>
+        <p>Current Westside Baseball offerings and camp opportunities are listed below.</p>
       </div>
       <div class="clinic-grid">
-        <article class="schedule-card">
-          <span class="date-chip">June 15 • 9:00 AM</span>
-          <h4>Hitting Mechanics Clinic</h4>
-          <p>Focused on load, timing, bat path, and building a consistent approach against velocity.</p>
+        <article class="schedule-card" data-carousel-source="clinic">
+          <div class="schedule-top">
+            <span class="date-chip">Available Now</span>
+            <span class="price-badge">$40 / Hour</span>
+          </div>
+          <h4>Private 1-1 Lessons</h4>
+          <p class="service-date">Contact to Schedule</p>
+          <p>Individual instruction tailored to the player with focused coaching and personalized development work.</p>
           <div class="pill-row">
-            <span class="pill">Ages 11-14</span>
-            <span class="pill">90 Minutes</span>
-            <span class="pill">Small Group</span>
+            <span class="pill">1 Player</span>
+            <span class="pill">Private Instruction</span>
           </div>
         </article>
-        <article class="schedule-card">
-          <span class="date-chip">June 22 • 10:30 AM</span>
-          <h4>Defense + Footwork</h4>
-          <p>Infield and outfield movement patterns, glove presentation, transfer work, and reaction training.</p>
+        <article class="schedule-card" data-carousel-source="clinic">
+          <div class="schedule-top">
+            <span class="date-chip">Available Now</span>
+            <span class="price-badge">$60 / Hour</span>
+          </div>
+          <h4>Group 4-1 Lessons</h4>
+          <p class="service-date">Contact to Schedule</p>
+          <p>Small-group lessons that combine skill development, shared reps, and instruction in a competitive setting.</p>
           <div class="pill-row">
-            <span class="pill">Ages 10-13</span>
-            <span class="pill">75 Minutes</span>
-            <span class="pill">Clinic Format</span>
+            <span class="pill">4 Players</span>
+            <span class="pill">Group Training</span>
           </div>
         </article>
-        <article class="schedule-card">
-          <span class="date-chip">July 6 • 8:30 AM</span>
-          <h4>Complete Player Camp</h4>
-          <p>An extended session covering hitting, defense, baserunning, throwing, and live competition reps.</p>
+        <article class="schedule-card" data-carousel-source="clinic">
+          <div class="schedule-top">
+            <span class="date-chip">Available Now</span>
+            <span class="price-badge price-badge-free">Free</span>
+          </div>
+          <h4>Free Family Camp</h4>
+          <p class="service-date">Sunday 4/29 • 5:30-6:30 PM</p>
+          <p>Players attend with an adult to learn hitting drills and take-home routines they can continue working on together outside of camp.</p>
           <div class="pill-row">
-            <span class="pill">Ages 12-16</span>
-            <span class="pill">Half Day</span>
-            <span class="pill">High Rep Volume</span>
+            <span class="pill">Family Event</span>
+            <span class="pill">1 Hour</span>
+          </div>
+          <div class="card-actions">
+            <a class="button button-primary" href="#" role="button">Sign Up</a>
+          </div>
+        </article>
+        <article class="schedule-card" data-carousel-source="clinic">
+          <div class="schedule-top">
+            <span class="date-chip">Available Now</span>
+            <span class="price-badge">$60 / Player</span>
+          </div>
+          <h4>Summer Camp</h4>
+          <p class="service-date">July 14-15 • 1:30-4:30 PM</p>
+          <p>Two afternoons of instruction, reps, and camp-style development for players looking to build skills over the summer.</p>
+          <div class="pill-row">
+            <span class="pill">2 Days</span>
+            <span class="pill">Summer Camp</span>
+          </div>
+          <div class="card-actions">
+            <a class="button button-primary" href="#" role="button">Sign Up</a>
           </div>
         </article>
       </div>
@@ -1116,7 +1482,7 @@
     <section class="panel" id="teams" role="tabpanel" aria-labelledby="tab-teams" hidden>
       <div class="coming-card">
         <div class="coming-copy">
-          <span class="eyebrow">Travel Teams</span>
+          <span class="eyebrow">High School Travel Team</span>
           <h4>Coming Summer 2027</h4>
         </div>
         <div class="coming-art" aria-hidden="true">
@@ -1138,15 +1504,13 @@
       <div class="section-head">
         <span class="eyebrow">Contact Us</span>
         <h3>Start The Conversation.</h3>
-        <p>Add your real contact details when ready. The structure is in place for inquiries about lessons, clinics, and team opportunities.</p>
       </div>
       <div class="contact-grid">
         <div class="contact-card">
           <h4>Program Inquiries</h4>
           <ul class="contact-list">
-            <li><strong>Email:</strong> info@westsidebaseball.com</li>
-            <li><strong>Phone:</strong> (555) 123-4567</li>
-            <li><strong>Location:</strong> Westside training facilities and regional tournament fields</li>
+            <li><strong>Email:</strong> info@wtstbaseball.com</li>
+            <li><strong>Location:</strong> Janesville, WI - Westside</li>
           </ul>
         </div>
         <div class="contact-card">
@@ -1218,7 +1582,7 @@
   </main>
 
   <footer class="shell">
-    <p>2026 Westside Baseball.</p>
+    <p>2026 Westside Baseball. All Rights Reserved.</p>
     <a class="view-toggle" id="view-toggle" href="#">Switch to Mobile View</a>
   </footer>
 
@@ -1230,6 +1594,15 @@
     const viewToggle = document.getElementById("view-toggle");
     const menuToggle = document.getElementById("menu-toggle");
     const viewStorageKey = "westside-view-mode";
+    const carouselTrack = document.getElementById("home-carousel-track");
+    const carouselPrev = document.getElementById("carousel-prev");
+    const carouselPause = document.getElementById("carousel-pause");
+    const carouselNext = document.getElementById("carousel-next");
+    const carouselIntervalMs = 5000;
+    let carouselSlides = [];
+    let carouselIndex = 0;
+    let carouselTimer = null;
+    let carouselPaused = false;
 
     function activateTab(targetId) {
       tabs.forEach((tab) => {
@@ -1295,6 +1668,95 @@
       window.localStorage.setItem(viewStorageKey, mode);
     }
 
+    function renderCarouselSlide(source) {
+      if (source.dataset.carouselSource === "announcement") {
+        return `
+          <div class="carousel-label">Featured Announcement</div>
+          <h4 class="carousel-title">Westside High School Team Launching Summer 2027</h4>
+          <p class="carousel-copy">Westside Baseball is establishing a Westside high school travel team for Summer 2027. More details to follow as plans are finalized.</p>
+        `;
+      }
+
+      return source.innerHTML;
+    }
+
+    function updateCarouselStatus() {
+      if (!carouselSlides.length) {
+        return;
+      }
+    }
+
+    function syncPauseButton() {
+      if (!carouselPause) {
+        return;
+      }
+
+      carouselPause.innerHTML = carouselPaused ? "&#9654;" : "&#10074;&#10074;";
+      carouselPause.setAttribute("aria-label", carouselPaused ? "Resume carousel" : "Pause carousel");
+      carouselPause.setAttribute("title", carouselPaused ? "Resume carousel" : "Pause carousel");
+    }
+
+    function showCarouselSlide(index) {
+      if (!carouselSlides.length) {
+        return;
+      }
+
+      carouselIndex = (index + carouselSlides.length) % carouselSlides.length;
+      carouselSlides.forEach((slide, slideIndex) => {
+        slide.classList.toggle("active", slideIndex === carouselIndex);
+        slide.setAttribute("aria-hidden", String(slideIndex !== carouselIndex));
+      });
+      updateCarouselStatus();
+    }
+
+    function stopCarousel() {
+      if (carouselTimer) {
+        window.clearInterval(carouselTimer);
+        carouselTimer = null;
+      }
+    }
+
+    function startCarousel() {
+      stopCarousel();
+      if (carouselPaused || carouselSlides.length <= 1) {
+        updateCarouselStatus();
+        return;
+      }
+
+      carouselTimer = window.setInterval(() => {
+        showCarouselSlide(carouselIndex + 1);
+      }, carouselIntervalMs);
+      updateCarouselStatus();
+    }
+
+    function buildCarousel() {
+      if (!carouselTrack) {
+        return;
+      }
+
+      const sources = Array.from(document.querySelectorAll("[data-carousel-source]"));
+
+      if (!sources.length) {
+        return;
+      }
+
+      carouselTrack.innerHTML = "";
+      sources.forEach((source) => {
+        const slide = document.createElement("article");
+        slide.className = "hero-card carousel-slide";
+        if (source.dataset.carouselSource === "clinic") {
+          slide.classList.add("carousel-slide-clinic");
+        }
+        slide.setAttribute("aria-hidden", "true");
+        slide.innerHTML = renderCarouselSlide(source);
+        carouselTrack.appendChild(slide);
+      });
+
+      carouselSlides = Array.from(carouselTrack.querySelectorAll(".carousel-slide"));
+      showCarouselSlide(0);
+      startCarousel();
+    }
+
     if (logoImage) {
       logoImage.addEventListener("load", () => logoImage.classList.add("visible"));
       logoImage.addEventListener("error", () => logoImage.remove());
@@ -1316,8 +1778,37 @@
       });
     }
 
-    setViewMode(window.localStorage.getItem(viewStorageKey) === "mobile" ? "mobile" : "desktop");
+    if (carouselPrev) {
+      carouselPrev.addEventListener("click", () => {
+        showCarouselSlide(carouselIndex - 1);
+        startCarousel();
+      });
+    }
 
+    if (carouselNext) {
+      carouselNext.addEventListener("click", () => {
+        showCarouselSlide(carouselIndex + 1);
+        startCarousel();
+      });
+    }
+
+    if (carouselPause) {
+      carouselPause.addEventListener("click", () => {
+        carouselPaused = !carouselPaused;
+        carouselPause.setAttribute("aria-pressed", String(carouselPaused));
+        if (carouselPaused) {
+          stopCarousel();
+          updateCarouselStatus();
+        } else {
+          startCarousel();
+        }
+        syncPauseButton();
+      });
+    }
+
+    setViewMode(window.localStorage.getItem(viewStorageKey) === "mobile" ? "mobile" : "desktop");
+    syncPauseButton();
+    buildCarousel();
     activateTab(validTabs.has(initialTab) ? initialTab : "home");
   </script>
 </body>
