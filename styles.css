@@ -426,12 +426,14 @@ main {
 }
 
 .facebook-panel {
+  --facebook-iframe-min-height: 360px;
   margin-top: 28px;
   padding: 28px;
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(300px, 500px);
   gap: 28px;
   align-items: start;
+  min-height: calc(var(--facebook-iframe-min-height) + 56px);
   background: linear-gradient(180deg, var(--panel), var(--panel-strong));
   border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: var(--radius);
@@ -457,7 +459,7 @@ main {
 
 .facebook-embed {
   width: 100%;
-  min-height: 600px;
+  min-height: var(--facebook-iframe-min-height);
   display: grid;
   justify-items: end;
   overflow: hidden;
@@ -469,6 +471,7 @@ main {
 .facebook-embed iframe {
   max-width: 100%;
   width: 100%;
+  min-height: var(--facebook-iframe-min-height);
 }
 
 .hero-brand {
