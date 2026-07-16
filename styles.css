@@ -425,6 +425,52 @@ main {
   display: block;
 }
 
+.facebook-panel {
+  margin-top: 28px;
+  padding: 28px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 500px);
+  gap: 28px;
+  align-items: start;
+  background: linear-gradient(180deg, var(--panel), var(--panel-strong));
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.facebook-panel-copy h3 {
+  margin: 16px 0 0;
+  max-width: 14ch;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  line-height: 0.95;
+}
+
+.facebook-panel-copy p {
+  margin: 18px 0 0;
+  max-width: 48ch;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.facebook-embed {
+  width: 100%;
+  min-height: 600px;
+  display: grid;
+  justify-items: end;
+  overflow: hidden;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.facebook-embed iframe {
+  max-width: 100%;
+  width: 100%;
+}
+
 .hero-brand {
   padding: 28px;
   display: grid;
@@ -1126,6 +1172,7 @@ body.view-mobile .stats {
 
 body.view-mobile .hero-copy,
 body.view-mobile .carousel-shell,
+body.view-mobile .facebook-panel,
 body.view-mobile .content-block,
 body.view-mobile .card,
 body.view-mobile .schedule-card,
@@ -1137,6 +1184,14 @@ body.view-mobile .hero-brand {
 
 body.view-mobile .carousel-slide {
   padding: 22px 22px 86px;
+}
+
+body.view-mobile .facebook-panel {
+  grid-template-columns: 1fr;
+}
+
+body.view-mobile .facebook-embed {
+  justify-items: center;
 }
 
 body.view-mobile .brand {
@@ -1279,6 +1334,14 @@ body.view-mobile .team-photo {
   .team-photo {
     max-width: 220px;
   }
+
+  .facebook-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .facebook-embed {
+    justify-items: center;
+  }
 }
 
 @media (max-width: 640px) {
@@ -1288,6 +1351,7 @@ body.view-mobile .team-photo {
 
   .hero-copy,
   .carousel-shell,
+  .facebook-panel,
   .content-block,
   .card,
   .schedule-card,
