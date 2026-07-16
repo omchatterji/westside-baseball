@@ -754,15 +754,32 @@ main {
 
 .feature-band {
   margin-top: 24px;
-  padding: 20px 24px;
+  padding: 24px 28px;
   border-radius: 22px;
-  background: linear-gradient(90deg, rgba(201, 255, 26, 0.14), rgba(79, 210, 41, 0.08));
-  border: 1px solid rgba(201, 255, 26, 0.15);
+  background: linear-gradient(90deg, rgba(201, 255, 26, 0.22), rgba(79, 210, 41, 0.12));
+  border: 1px solid rgba(201, 255, 26, 0.32);
+  box-shadow: 0 16px 34px rgba(79, 210, 41, 0.16);
   color: var(--text);
+  font-size: 1.1rem;
+  line-height: 1.5;
 }
 
 .feature-band strong {
   color: var(--lime);
+  font-size: 1.18rem;
+}
+
+.feature-band a {
+  color: var(--lime);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+
+.feature-band a:hover,
+.feature-band a:focus-visible {
+  color: var(--text);
+  outline: none;
 }
 
 .carousel-shell {
