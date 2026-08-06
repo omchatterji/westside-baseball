@@ -45,7 +45,7 @@
           </div>
         </div>
         <button class="tab-link" id="tab-programs" role="tab" aria-selected="false" aria-controls="programs" data-tab="programs">Our Programs</button>
-        <button class="tab-link" id="tab-clinics" role="tab" aria-selected="false" aria-controls="clinics" data-tab="clinics">Upcoming Clinics</button>
+        <button class="tab-link" id="tab-clinics" role="tab" aria-selected="false" aria-controls="clinics" data-tab="clinics">Upcoming Events</button>
         <button class="tab-link" id="tab-teams" role="tab" aria-selected="false" aria-controls="teams" data-tab="teams">Teams</button>
         <button class="tab-link" id="tab-contact" role="tab" aria-selected="false" aria-controls="contact" data-tab="contact">Contact Us</button>
       </nav>
@@ -275,15 +275,57 @@
 
     <section class="panel" id="clinics" role="tabpanel" aria-labelledby="tab-clinics" hidden>
       <div class="section-head">
-        <span class="eyebrow">Upcoming Clinics</span>
+        <span class="eyebrow">Upcoming Events</span>
         <h3>Train With A Plan.</h3>
         <p>Current Westside Baseball offerings and camp opportunities are listed below.</p>
       </div>
       <div class="clinic-grid">
-        <article class="schedule-card clinic-empty-card">
-          <span class="date-chip">More Events Coming Soon</span>
-          <h4>Check Back Soon For Upcoming Events</h4>
-          <p>New Westside Baseball clinics and training opportunities will be announced here as they become available.</p>
+        <article class="schedule-card clinic-empty-card" data-carousel-source="clinic">
+          <div class="schedule-top">
+            <span class="date-chip">Clinic</span>
+            <a class="button button-primary" href="https://forms.gle/MUzLj3MMwuayYeLb7" target="_blank" rel="noopener">Register Now</a>
+          </div>
+          <h4>All Baseball Skills Camp - Fall Sessions</h4>
+          <p class="service-date">Tuesdays &amp; Thursdays, 5:00-6:30 PM | August 25-October 1</p>
+          <p>Our all-encompassing fall baseball training package designed for late elementary and middle school players. 
+            This six-week camp covers hitting, speed, throwing, and defensive work. Sign up now!</p>
+          <div class="event-details">
+            <section class="event-detail">
+              <h5>Who</h5>
+              <p>3rd-8th grade players.</p>
+            </section>
+            <section class="event-detail">
+              <h5>Location</h5>
+              <p>Parker High School baseball fields/batting cages.</p>
+            </section>
+            <section class="event-detail">
+              <h5>What To Bring</h5>
+              <p>Baseball cleats, athletic shoes, hat, athletic clothing, water, glove, protective cup, and bat. Sessions may be inside or outside depending on weather.</p>
+            </section>
+            <section class="event-detail">
+              <h5>Cost</h5>
+              <p><strong>One day per week:</strong> $180 ($30/session)</p>
+              <p><strong>Two days per week:</strong> $300 ($25/session)</p>
+              <p>Payments accepted day-of. See registration form for more info.</p>
+            </section>
+            <section class="travel-schedule event-schedule">
+              <h5>Dates</h5>
+              <ul>
+                <li>Week 1 - Aug. 25 &amp; 27</li>
+                <li>Week 2 - Sept. 1 &amp; 3</li>
+                <li>Week 3 - Sept. 8 &amp; 10</li>
+                <li>Week 4 - Sept. 15 &amp; 17</li>
+                <li>Week 5 - Sept. 22 &amp; 24</li>
+                <li>Week 6 - Sept. 29 &amp; Oct. 1</li>
+              </ul>
+            </section>
+          </div>
+          <div class="pill-row">
+            <span class="pill">Hitting</span>
+            <span class="pill">Speed</span>
+            <span class="pill">Throwing</span>
+            <span class="pill">Defense</span>
+          </div>
         </article>
       </div>
     </section>
@@ -307,7 +349,7 @@
 
             <p>Some of the current summer ball experiences we hear from families within our program are not so great! We have more than enough quality baseball players in our Westside Baseball Community who want to play high school summer ball. Couple that with the WIAA allowing summer contact days for HS Coaches and this ends up being a big win for the Westside Baseball Community. We aim to continue to honor the tradition of Work Together, Stay Together! Our players will benefit from the consistency of coaching and playing with their teammates and friends. This opportunity will streamline players' practice schedules, lifting, school, work, etc. and will be inexpensive compared to what a traditional high school travel team program would charge. The budgeted cost will be 100% transparent to where your costs are going.</p>
 
-            <p>Westside Baseball players do not need to try out, they only need to register: <a href="https://docs.google.com/forms/d/1EjpglN4R9CYhY3V6xeg2my3G5kFDbRAzaMOGWeTSsD0/edit" target="_blank" rel="noopener">Register Here</a>. Once the coaching staff receives the registration, we will send a confirmation message to the player.</p>
+            <p>Westside Baseball players do not need to try out, they only need to register: <a href="https://docs.google.com/forms/d/1EjpglN4R9CYhY3V6xeg2my3G5kFDbRAzaMOGWeTSsD0/" target="_blank" rel="noopener">Register Here</a>. Once the coaching staff receives the registration, we will send a confirmation message to the player.</p>
 
             <p>No off season practices for this team. Players will get training opportunities through high school open gym times.</p>
 
@@ -614,6 +656,33 @@
         `;
       }
 
+      if (source.dataset.carouselSource === "clinic") {
+        const slideContent = source.cloneNode(true);
+        const clinicLabel = slideContent.querySelector(".date-chip");
+        if (clinicLabel) {
+          clinicLabel.className = "carousel-label";
+        }
+        const eventDetails = slideContent.querySelector(".event-details");
+        if (eventDetails) {
+          eventDetails.remove();
+        }
+        const eventCopy = slideContent.querySelector("h4 + .service-date + p");
+        if (eventCopy) {
+          const teaser = eventCopy.textContent.trim().replace(/\s+/g, " ");
+          const maxLength = 155;
+          const sentences = teaser.match(/[^.!?]+[.!?]+/g) || [teaser];
+          let trimmed = sentences[0].trim();
+          sentences.slice(1).forEach((sentence) => {
+            const next = `${trimmed} ${sentence.trim()}`;
+            if (next.length <= maxLength) {
+              trimmed = next;
+            }
+          });
+          eventCopy.innerHTML = `${trimmed}<br><a href="#clinics" data-carousel-jump="clinics">More Info...</a>`;
+        }
+        return slideContent.innerHTML;
+      }
+
       return source.innerHTML;
     }
 
@@ -671,7 +740,12 @@
         return;
       }
 
-      const sources = Array.from(document.querySelectorAll("[data-carousel-source]"));
+      const carouselPriority = { clinic: 0, event: 0, announcement: 1 };
+      const sources = Array.from(document.querySelectorAll("[data-carousel-source]")).sort((first, second) => {
+        const firstPriority = carouselPriority[first.dataset.carouselSource] ?? 2;
+        const secondPriority = carouselPriority[second.dataset.carouselSource] ?? 2;
+        return firstPriority - secondPriority;
+      });
 
       if (!sources.length) {
         return;

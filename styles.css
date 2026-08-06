@@ -663,6 +663,44 @@ main {
   grid-column: 1 / -1;
 }
 
+.event-details {
+  display: grid;
+  gap: 18px;
+  margin-top: 18px;
+}
+
+.event-detail {
+  display: grid;
+  gap: 8px;
+}
+
+.event-detail h5 {
+  margin: 0;
+  color: var(--lime);
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.event-detail p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.schedule-card a:not(.button) {
+  color: var(--lime);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+
+.schedule-card a:not(.button):hover,
+.schedule-card a:not(.button):focus-visible {
+  color: var(--text);
+  outline: none;
+}
+
 .schedule-top {
   display: flex;
   align-items: center;
@@ -943,6 +981,10 @@ main {
   margin-top: 18px;
 }
 
+.carousel-slide .schedule-top .carousel-label {
+  margin-bottom: 0;
+}
+
 .carousel-slide .feature-band {
   border-radius: 18px;
 }
@@ -960,6 +1002,19 @@ main {
   color: var(--muted);
   line-height: 1.7;
   max-width: 68ch;
+}
+
+.carousel-slide-clinic a:not(.button) {
+  color: var(--lime);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+
+.carousel-slide-clinic a:not(.button):hover,
+.carousel-slide-clinic a:not(.button):focus-visible {
+  color: var(--text);
+  outline: none;
 }
 
 .carousel-slide-clinic .service-date {
@@ -1299,6 +1354,10 @@ body.view-mobile .carousel-slide {
   padding: 22px 22px 86px;
 }
 
+body.view-mobile .carousel-slide-clinic .pill-row {
+  display: none;
+}
+
 body.view-mobile .facebook-panel {
   grid-template-columns: 1fr;
 }
@@ -1482,6 +1541,10 @@ body.view-mobile .team-photo {
 
   .carousel-slide {
     padding: 22px 22px 86px;
+  }
+
+  .carousel-slide-clinic .pill-row {
+    display: none;
   }
 
   .brand {
