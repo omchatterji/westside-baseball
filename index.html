@@ -136,6 +136,7 @@
         </div>
         <div class="facebook-embed">
           <iframe
+            id="facebook-page-iframe"
             title="Westside Baseball Facebook posts"
             src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fprofile.php%3Fid%3D61590904426589&tabs=timeline&width=500&height=360&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true"
             width="500"
@@ -578,6 +579,11 @@
     const carouselIntervalMs = 5000;
     const homeFlyerModal = document.getElementById("home-flyer-modal");
     const flyerCloseControls = Array.from(document.querySelectorAll("[data-flyer-close]"));
+    const facebookEmbed = document.querySelector(".facebook-embed");
+    const facebookIframe = document.getElementById("facebook-page-iframe");
+    const facebookPluginMaxWidth = 500;
+    const facebookPluginMinWidth = 180;
+    let facebookPluginSize = { width: 0, height: 0 };
     let carouselSlides = [];
     let carouselIndex = 0;
     let carouselTimer = null;
@@ -601,6 +607,63 @@
       homeFlyerDismissed = true;
       homeFlyerModal.hidden = true;
       document.body.classList.remove("modal-open");
+    }
+
+    function resizeFacebookPageEmbed() {
+      if (!facebookEmbed || !facebookIframe) {
+        return;
+      }
+
+      const embedStyles = window.getComputedStyle(facebookEmbed);
+      const measuredWidth = Math.floor(facebookEmbed.clientWidth);
+      const measuredHeight = Math.floor(facebookEmbed.clientHeight);
+      if (measuredWidth <= 0) {
+        return;
+      }
+
+      const minHeight = parseInt(embedStyles.minHeight, 10) || 360;
+      const nextWidth = Math.min(facebookPluginMaxWidth, Math.max(facebookPluginMinWidth, measuredWidth));
+      const nextHeight = Math.max(minHeight, measuredHeight);
+
+      if (nextWidth === facebookPluginSize.width && nextHeight === facebookPluginSize.height) {
+        return;
+      }
+
+      const pluginUrl = new URL(facebookIframe.src);
+      pluginUrl.searchParams.set("width", String(nextWidth));
+      pluginUrl.searchParams.set("height", String(nextHeight));
+      pluginUrl.searchParams.set("adapt_container_width", "true");
+
+      facebookPluginSize = { width: nextWidth, height: nextHeight };
+      facebookIframe.width = String(nextWidth);
+      facebookIframe.height = String(nextHeight);
+      facebookIframe.src = pluginUrl.toString();
+    }
+
+    function watchFacebookPageEmbed() {
+      if (!facebookEmbed || !facebookIframe) {
+        return;
+      }
+
+      resizeFacebookPageEmbed();
+
+      if (!("ResizeObserver" in window)) {
+        window.addEventListener("resize", resizeFacebookPageEmbed);
+        return;
+      }
+
+      let resizeFrame = null;
+      const observer = new ResizeObserver(() => {
+        if (resizeFrame) {
+          window.cancelAnimationFrame(resizeFrame);
+        }
+        resizeFrame = window.requestAnimationFrame(() => {
+          resizeFrame = null;
+          resizeFacebookPageEmbed();
+        });
+      });
+
+      observer.observe(facebookEmbed);
     }
 
     function activateTab(targetId) {
@@ -693,6 +756,7 @@
         menuToggle.setAttribute("aria-expanded", String(document.body.classList.contains("mobile-nav-open")));
       }
       window.localStorage.setItem(viewStorageKey, mode);
+      resizeFacebookPageEmbed();
     }
 
     function renderCarouselSlide(source) {
@@ -866,6 +930,7 @@
     }
 
     setViewMode(window.localStorage.getItem(viewStorageKey) === "mobile" ? "mobile" : "desktop");
+    watchFacebookPageEmbed();
     syncPauseButton();
     buildCarousel();
     activateTab(validTabs.has(initialTab) ? initialTab : "home");
