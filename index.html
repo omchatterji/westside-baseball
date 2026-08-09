@@ -609,6 +609,16 @@
       document.body.classList.remove("modal-open");
     }
 
+    function reopenHomeFlyerOnPageRestore() {
+      const currentTab = window.location.hash.replace("#", "") || "home";
+      if (currentTab !== "home") {
+        return;
+      }
+
+      homeFlyerDismissed = false;
+      openHomeFlyer();
+    }
+
     function resizeFacebookPageEmbed() {
       if (!facebookEmbed || !facebookIframe) {
         return;
@@ -738,6 +748,12 @@
     document.addEventListener("keydown", (event) => {
       if (event.key === "Escape" && homeFlyerModal && !homeFlyerModal.hidden) {
         closeHomeFlyer();
+      }
+    });
+
+    window.addEventListener("pageshow", (event) => {
+      if (event.persisted) {
+        reopenHomeFlyerOnPageRestore();
       }
     });
 
@@ -934,6 +950,7 @@
     syncPauseButton();
     buildCarousel();
     activateTab(validTabs.has(initialTab) ? initialTab : "home");
+    reopenHomeFlyerOnPageRestore();
   </script>
 </body>
 </html>
