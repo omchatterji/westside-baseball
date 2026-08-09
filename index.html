@@ -539,6 +539,18 @@
     </section>
   </main>
 
+  <div class="flyer-modal" id="home-flyer-modal" role="dialog" aria-modal="true" aria-labelledby="home-flyer-title" hidden>
+    <div class="flyer-modal-backdrop" data-flyer-close></div>
+    <div class="flyer-modal-panel">
+      <button class="flyer-modal-close" type="button" aria-label="Close flyer" data-flyer-close>&times;</button>
+      <h2 id="home-flyer-title" class="sr-only">All Baseball Skills Camp flyer</h2>
+      <img class="flyer-modal-image" src="all-baseball-skills-camp-flyer.png" alt="All Baseball Skills Camp Fall Sessions flyer">
+      <div class="flyer-modal-actions">
+        <a class="button button-primary" href="https://forms.gle/MUzLj3MMwuayYeLb7" target="_blank" rel="noopener">Register Now</a>
+      </div>
+    </div>
+  </div>
+
   <footer class="shell">
     <div class="footer-row">
       <p>2026 Westside Baseball. All Rights Reserved.</p>
@@ -564,10 +576,32 @@
     const carouselPause = document.getElementById("carousel-pause");
     const carouselNext = document.getElementById("carousel-next");
     const carouselIntervalMs = 5000;
+    const homeFlyerModal = document.getElementById("home-flyer-modal");
+    const flyerCloseControls = Array.from(document.querySelectorAll("[data-flyer-close]"));
     let carouselSlides = [];
     let carouselIndex = 0;
     let carouselTimer = null;
     let carouselPaused = false;
+    let homeFlyerDismissed = false;
+
+    function openHomeFlyer() {
+      if (!homeFlyerModal || homeFlyerDismissed) {
+        return;
+      }
+
+      homeFlyerModal.hidden = false;
+      document.body.classList.add("modal-open");
+    }
+
+    function closeHomeFlyer() {
+      if (!homeFlyerModal) {
+        return;
+      }
+
+      homeFlyerDismissed = true;
+      homeFlyerModal.hidden = true;
+      document.body.classList.remove("modal-open");
+    }
 
     function activateTab(targetId) {
       tabs.forEach((tab) => {
@@ -583,6 +617,10 @@
       });
 
       window.history.replaceState(null, "", "#" + targetId);
+
+      if (targetId === "home") {
+        openHomeFlyer();
+      }
     }
 
     function jumpToTab(targetId) {
@@ -628,6 +666,16 @@
 
       event.preventDefault();
       jumpToTab(link.dataset.carouselJump);
+    });
+
+    flyerCloseControls.forEach((control) => {
+      control.addEventListener("click", closeHomeFlyer);
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && homeFlyerModal && !homeFlyerModal.hidden) {
+        closeHomeFlyer();
+      }
     });
 
     const initialTab = window.location.hash.replace("#", "");
