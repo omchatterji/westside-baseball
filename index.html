@@ -274,7 +274,7 @@
         <article class="schedule-card clinic-empty-card" data-carousel-source="clinic">
           <div class="schedule-top">
             <span class="date-chip">Clinic</span>
-            <a class="button button-primary" href="https://forms.gle/MUzLj3MMwuayYeLb7" target="_blank" rel="noopener">Register Now</a>
+            <span class="button button-full" aria-disabled="true">Full</span>
           </div>
           <h4>All Baseball Skills Camp - Fall Sessions</h4>
           <p class="service-date">Tuesdays &amp; Thursdays, 5:00-6:30 PM | August 25-October 1</p>
@@ -568,6 +568,7 @@
     const carouselPause = document.getElementById("carousel-pause");
     const carouselNext = document.getElementById("carousel-next");
     const carouselIntervalMs = 5000;
+    const homeFlyerEnabled = false;
     const homeFlyerModal = document.getElementById("home-flyer-modal");
     const flyerCloseControls = Array.from(document.querySelectorAll("[data-flyer-close]"));
     const facebookEmbed = document.querySelector(".facebook-embed");
@@ -582,7 +583,7 @@
     let homeFlyerDismissed = false;
 
     function openHomeFlyer() {
-      if (!homeFlyerModal || homeFlyerDismissed) {
+      if (!homeFlyerEnabled || !homeFlyerModal || homeFlyerDismissed) {
         return;
       }
 
@@ -601,6 +602,10 @@
     }
 
     function reopenHomeFlyerOnPageRestore() {
+      if (!homeFlyerEnabled) {
+        return;
+      }
+
       const currentTab = window.location.hash.replace("#", "") || "home";
       if (currentTab !== "home") {
         return;
