@@ -925,6 +925,10 @@ main {
   outline: none;
 }
 
+.event-training-band {
+  margin-bottom: 22px;
+}
+
 .carousel-shell {
   margin-top: 28px;
   position: relative;
@@ -1334,14 +1338,15 @@ footer p {
 .flyer-modal-panel {
   position: relative;
   z-index: 1;
-  width: fit-content;
-  max-width: calc(100vw - 48px);
-  max-height: calc(100vh - 48px);
+  width: min(calc(100vw - 48px), 560px);
   border: 1px solid rgba(201, 255, 26, 0.28);
-  border-radius: 18px;
-  background: rgba(5, 8, 12, 0.94);
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at top left, rgba(201, 255, 26, 0.2), transparent 36%),
+    linear-gradient(180deg, rgba(17, 22, 31, 0.97), rgba(5, 8, 12, 0.98));
   box-shadow: 0 32px 90px rgba(0, 0, 0, 0.72);
-  overflow: visible;
+  overflow: hidden;
+  padding: 34px;
 }
 
 .flyer-modal-image {
@@ -1355,11 +1360,9 @@ footer p {
 }
 
 .flyer-modal-actions {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  z-index: 2;
   display: flex;
+  justify-content: flex-start;
+  margin-top: 24px;
   padding: 0;
 }
 
@@ -1367,6 +1370,28 @@ footer p {
   min-height: 42px;
   padding: 10px 16px;
   box-shadow: 0 12px 28px rgba(79, 210, 41, 0.35);
+}
+
+.training-popup {
+  display: grid;
+  gap: 14px;
+  padding-right: 42px;
+}
+
+.training-popup h2 {
+  margin: 0;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-size: clamp(2.6rem, 8vw, 4.8rem);
+  line-height: 0.95;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.training-popup p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.65;
 }
 
 .flyer-modal-close {
@@ -1532,10 +1557,9 @@ body.view-mobile .flyer-modal {
 }
 
 body.view-mobile .flyer-modal-panel {
-  width: fit-content;
-  max-width: calc(100vw - 20px);
-  max-height: 92vh;
+  width: min(calc(100vw - 20px), 390px);
   border-radius: 14px;
+  padding: 26px;
 }
 
 body.view-mobile .flyer-modal-image {
@@ -1686,10 +1710,9 @@ body.view-mobile .flyer-modal-image {
   }
 
   .flyer-modal-panel {
-    width: fit-content;
-    max-width: calc(100vw - 20px);
-    max-height: 92vh;
+    width: min(calc(100vw - 20px), 390px);
     border-radius: 14px;
+    padding: 26px;
   }
 
   .flyer-modal-image {

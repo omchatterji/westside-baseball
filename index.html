@@ -58,8 +58,8 @@
         <div class="hero-card hero-copy">
           <h2>Built For Westside Ballplayers Who Want More.</h2>
           <div class="feature-band" id="team-launch-highlight" data-carousel-source="announcement">
-            <strong>Register Now:</strong> Registration is now open for our 2027 Summer Team!
-            <a href="#teams" data-jump="teams">Click here</a> to register.
+            <strong>Want Baseball Training?</strong> Tell us what you're looking for!
+            <a href="https://forms.gle/2Je5MgprZcJ2K23u7" target="_blank" rel="noopener">Click here</a>
           </div>
           <p class="announcement-note">
             It's official! Read our Westside Baseball Travel Team Announcement <a href="#teams" data-jump="teams">here</a>.
@@ -269,6 +269,10 @@
         <span class="eyebrow">Upcoming Events</span>
         <h3>Train With A Plan.</h3>
         <p>Current Westside Baseball offerings and camp opportunities are listed below.</p>
+      </div>
+      <div class="feature-band event-training-band">
+        <strong>Want Baseball Training?</strong> Tell us what you're looking for!
+        <a href="https://forms.gle/2Je5MgprZcJ2K23u7" target="_blank" rel="noopener">Click here</a>
       </div>
       <div class="clinic-grid">
         <article class="schedule-card clinic-empty-card" data-carousel-source="clinic">
@@ -531,14 +535,16 @@
     </section>
   </main>
 
-  <div class="flyer-modal" id="home-flyer-modal" role="dialog" aria-modal="true" aria-labelledby="home-flyer-title" hidden>
+  <div class="flyer-modal" id="home-flyer-modal" role="dialog" aria-modal="true" aria-labelledby="home-training-title" hidden>
     <div class="flyer-modal-backdrop" data-flyer-close></div>
     <div class="flyer-modal-panel">
-      <button class="flyer-modal-close" type="button" aria-label="Close flyer" data-flyer-close>&times;</button>
-      <h2 id="home-flyer-title" class="sr-only">All Baseball Skills Camp flyer</h2>
-      <img class="flyer-modal-image" src="all-baseball-skills-camp-flyer.png" alt="All Baseball Skills Camp Fall Sessions flyer">
+      <button class="flyer-modal-close" type="button" aria-label="Close popup" data-flyer-close>&times;</button>
+      <div class="training-popup">
+        <h2 id="home-training-title">Want Baseball Training?</h2>
+        <p>Tell us what kind of training you are looking for and we will follow up with available options.</p>
+      </div>
       <div class="flyer-modal-actions">
-        <a class="button button-primary" href="https://forms.gle/MUzLj3MMwuayYeLb7" target="_blank" rel="noopener">Register Now</a>
+        <a class="button button-primary" href="https://forms.gle/2Je5MgprZcJ2K23u7" target="_blank" rel="noopener">Click here!</a>
       </div>
     </div>
   </div>
@@ -568,7 +574,7 @@
     const carouselPause = document.getElementById("carousel-pause");
     const carouselNext = document.getElementById("carousel-next");
     const carouselIntervalMs = 5000;
-    const homeFlyerEnabled = false;
+    const homeFlyerEnabled = true;
     const homeFlyerModal = document.getElementById("home-flyer-modal");
     const flyerCloseControls = Array.from(document.querySelectorAll("[data-flyer-close]"));
     const facebookEmbed = document.querySelector(".facebook-embed");
