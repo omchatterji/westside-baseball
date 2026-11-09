@@ -275,52 +275,65 @@
         <a href="https://forms.gle/2Je5MgprZcJ2K23u7" target="_blank" rel="noopener">Click here</a>
       </div>
       <div class="clinic-grid">
-        <article class="schedule-card clinic-empty-card" data-carousel-source="clinic">
+        <article class="schedule-card" data-carousel-source="event">
           <div class="schedule-top">
             <span class="date-chip">Clinic</span>
-            <span class="button button-full" aria-disabled="true">FULL</span>
+            <a class="button button-primary" href="https://forms.gle/mF7UDNJLsu8FePCP9" target="_blank" rel="noopener">Sign Up!</a>
           </div>
-          <h4>All Baseball Skills Camp - Fall Sessions</h4>
-          <p class="service-date">Tuesdays &amp; Thursdays, 5:00-6:30 PM | August 25-October 1</p>
-          <p>Our all-encompassing fall baseball training package designed for late elementary and middle school players. 
-            This six-week camp covers hitting, speed, throwing, and defensive work. Sign up now!</p>
-          <p>***In case of bad weather, sessions will either be rescheduled or refunded.***</p>
+          <h4>Thanksgiving Break Hitting Camp</h4>
+          <p class="service-date">Friday, November 27 | 10:00 AM-12:00 PM</p>
+          <p>Single-day hitting camp focused on off-season swing development. We will focus on swing mechanics, swing breakdown, and rotational exercises designed to improve exit velocity.</p>
           <div class="event-details">
             <section class="event-detail">
               <h5>Who</h5>
-              <p>3rd-8th grade players.</p>
+              <p>3rd-8th grade.</p>
             </section>
             <section class="event-detail">
               <h5>Location</h5>
-              <p>Parker High School baseball fields/batting cages.</p>
+              <p>Parker High School - Fieldhouse.</p>
             </section>
             <section class="event-detail">
               <h5>What To Bring</h5>
-              <p>Baseball cleats, athletic shoes, hat, athletic clothing, water, glove, protective cup, and bat.</p>
+              <p>Athletic shoes, athletic clothing, and bat - no cleats.</p>
             </section>
             <section class="event-detail">
               <h5>Cost</h5>
-              <p><strong>One day per week:</strong> $180 ($30/session)</p>
-              <p><strong>Two days per week:</strong> $300 ($25/session)</p>
-              <p>Payments accepted day-of. See registration form for more info.</p>
-            </section>
-            <section class="travel-schedule event-schedule">
-              <h5>Dates</h5>
-              <ul>
-                <li>Week 1 - Aug. 25 &amp; 27</li>
-                <li>Week 2 - Sept. 1 &amp; 3</li>
-                <li>Week 3 - Sept. 8 &amp; 10</li>
-                <li>Week 4 - Sept. 15 &amp; 17</li>
-                <li>Week 5 - Sept. 22 &amp; 24</li>
-                <li>Week 6 - Sept. 29 &amp; Oct. 1</li>
-              </ul>
+              <p>$20 per player.</p>
             </section>
           </div>
           <div class="pill-row">
             <span class="pill">Hitting</span>
-            <span class="pill">Speed</span>
-            <span class="pill">Throwing</span>
-            <span class="pill">Defense</span>
+            <span class="pill">Swing Mechanics</span>
+            <span class="pill">Exit Velocity</span>
+          </div>
+        </article>
+
+        <article class="schedule-card" data-carousel-source="event">
+          <div class="schedule-top">
+            <span class="date-chip">Clinic</span>
+            <a class="button button-primary" href="https://forms.gle/mF7UDNJLsu8FePCP9" target="_blank" rel="noopener">Sign Up!</a>
+          </div>
+          <h4>Winter Break Baseball Camp</h4>
+          <p class="service-date">Monday, December 28 &amp; Tuesday, December 29 | 10:00 AM-12:00 PM</p>
+          <p>Keep your skills sharp this winter! Come to our Winter Break Camp and work on both fielding and hitting drills each day.</p>
+          <div class="event-details">
+            <section class="event-detail">
+              <h5>Location</h5>
+              <p>Parker High School - Fieldhouse.</p>
+            </section>
+            <section class="event-detail">
+              <h5>What To Bring</h5>
+              <p>Athletic shoes, athletic clothing, glove, and bat - no cleats.</p>
+            </section>
+            <section class="event-detail">
+              <h5>Cost</h5>
+              <p>$40 per player.</p>
+            </section>
+          </div>
+          <div class="pill-row">
+            <span class="pill">Fielding</span>
+            <span class="pill">Hitting</span>
+            <span class="pill">Winter Work</span>
           </div>
         </article>
       </div>
@@ -535,16 +548,14 @@
     </section>
   </main>
 
-  <div class="flyer-modal" id="home-flyer-modal" role="dialog" aria-modal="true" aria-labelledby="home-training-title" hidden>
+  <div class="flyer-modal" id="home-flyer-modal" role="dialog" aria-modal="true" aria-labelledby="home-flyer-title" hidden>
     <div class="flyer-modal-backdrop" data-flyer-close></div>
     <div class="flyer-modal-panel">
       <button class="flyer-modal-close" type="button" aria-label="Close popup" data-flyer-close>&times;</button>
-      <div class="training-popup">
-        <h2 id="home-training-title">Want Baseball Training?</h2>
-        <p>Tell us what kind of training you are looking for and we will follow up with available options.</p>
-      </div>
+      <h2 id="home-flyer-title" class="sr-only">Thanksgiving Break and Winter Break camps flyer</h2>
+      <img class="flyer-modal-image" src="thanksgiving-winter-break-camp-dual-flyer-2026.png" alt="Thanksgiving Break Hitting Camp and Winter Break Baseball Camp flyer">
       <div class="flyer-modal-actions">
-        <a class="button button-primary" href="https://forms.gle/2Je5MgprZcJ2K23u7" target="_blank" rel="noopener">Click here!</a>
+        <a class="button button-primary" href="https://forms.gle/mF7UDNJLsu8FePCP9" target="_blank" rel="noopener">Sign Up!</a>
       </div>
     </div>
   </div>
@@ -786,7 +797,7 @@
         `;
       }
 
-      if (source.dataset.carouselSource === "clinic") {
+      if (source.dataset.carouselSource === "clinic" || source.dataset.carouselSource === "event") {
         const slideContent = source.cloneNode(true);
         const clinicLabel = slideContent.querySelector(".date-chip");
         if (clinicLabel) {
@@ -885,7 +896,7 @@
       sources.forEach((source) => {
         const slide = document.createElement("article");
         slide.className = "hero-card carousel-slide";
-        if (source.dataset.carouselSource === "clinic") {
+        if (source.dataset.carouselSource === "clinic" || source.dataset.carouselSource === "event") {
           slide.classList.add("carousel-slide-clinic");
         }
         slide.setAttribute("aria-hidden", "true");
